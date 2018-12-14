@@ -8,8 +8,9 @@ package types
 import (
 	"strconv"
 
-	"github.com/go-openapi/errors"
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 )
@@ -89,6 +90,9 @@ type Resources struct {
 	// A list of devices to add to the container.
 	Devices []*DeviceMapping `json:"Devices"`
 
+	// update disk quota for container
+	DiskQuota map[string]string `json:"DiskQuota,omitempty"`
+
 	// Maximum IO in bytes per second for the container system drive (Windows only)
 	IOMaximumBandwidth uint64 `json:"IOMaximumBandwidth"`
 
@@ -122,7 +126,7 @@ type Resources struct {
 	// Total memory limit (memory + swap). Set as `-1` to enable unlimited swap.
 	MemorySwap int64 `json:"MemorySwap"`
 
-	// Tune a container's memory swappiness behavior. Accepts an integer between 0 and 100.
+	// Tune a container's memory swappiness behavior. Accepts an integer between 0 and 100. -1 is also accepted, as a legacy alias of 0.
 	// Maximum: 100
 	// Minimum: -1
 	MemorySwappiness *int64 `json:"MemorySwappiness"`

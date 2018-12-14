@@ -68,12 +68,18 @@ func (uc *UpdateCommand) updateRun(args []string) error {
 		return err
 	}
 
+	diskQuota, err := opts.ParseDiskQuota(uc.diskQuota)
+	if err != nil {
+		return err
+	}
+
 	resource := types.Resources{
 		CPUPeriod:   uc.cpuperiod,
 		CPUShares:   uc.cpushare,
 		CPUQuota:    uc.cpuquota,
 		CpusetCpus:  uc.cpusetcpus,
 		CpusetMems:  uc.cpusetmems,
+		DiskQuota:   diskQuota,
 		Memory:      memory,
 		MemorySwap:  memorySwap,
 		BlkioWeight: uc.blkioWeight,
@@ -84,17 +90,11 @@ func (uc *UpdateCommand) updateRun(args []string) error {
 		return err
 	}
 
-	diskQuota, err := opts.ParseDiskQuota(uc.diskQuota)
-	if err != nil {
-		return err
-	}
-
 	updateConfig := &types.UpdateConfig{
 		Env:           uc.env,
 		Label:         uc.labels,
 		RestartPolicy: restartPolicy,
 		Resources:     resource,
-		DiskQuota:     diskQuota,
 	}
 
 	apiClient := uc.cli.Client()

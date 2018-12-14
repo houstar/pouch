@@ -1048,7 +1048,7 @@ func (mgr *ContainerManager) Update(ctx context.Context, name string, config *ty
 	}
 
 	// update container disk quota
-	if err := mgr.updateContainerDiskQuota(ctx, c, config.DiskQuota); err != nil {
+	if err := mgr.updateContainerDiskQuota(ctx, c, config.Resources.DiskQuota); err != nil {
 		return errors.Wrapf(err, "failed to update diskquota of container %s", c.ID)
 	}
 

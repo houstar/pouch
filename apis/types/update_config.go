@@ -6,8 +6,9 @@ package types
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"github.com/go-openapi/errors"
 	strfmt "github.com/go-openapi/strfmt"
+
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/swag"
 )
 
@@ -15,9 +16,6 @@ import (
 // swagger:model UpdateConfig
 type UpdateConfig struct {
 	Resources
-
-	// update disk quota for container
-	DiskQuota map[string]string `json:"DiskQuota,omitempty"`
 
 	// A list of environment variables to set inside the container in the form `["VAR=value", ...]`. A variable without `=` is removed from the environment, rather than to have an empty value.
 	//
@@ -41,8 +39,6 @@ func (m *UpdateConfig) UnmarshalJSON(raw []byte) error {
 
 	// AO1
 	var dataAO1 struct {
-		DiskQuota map[string]string `json:"DiskQuota,omitempty"`
-
 		Env []string `json:"Env"`
 
 		Label []string `json:"Label"`
@@ -52,8 +48,6 @@ func (m *UpdateConfig) UnmarshalJSON(raw []byte) error {
 	if err := swag.ReadJSON(raw, &dataAO1); err != nil {
 		return err
 	}
-
-	m.DiskQuota = dataAO1.DiskQuota
 
 	m.Env = dataAO1.Env
 
@@ -75,16 +69,12 @@ func (m UpdateConfig) MarshalJSON() ([]byte, error) {
 	_parts = append(_parts, aO0)
 
 	var dataAO1 struct {
-		DiskQuota map[string]string `json:"DiskQuota,omitempty"`
-
 		Env []string `json:"Env"`
 
 		Label []string `json:"Label"`
 
 		RestartPolicy *RestartPolicy `json:"RestartPolicy,omitempty"`
 	}
-
-	dataAO1.DiskQuota = m.DiskQuota
 
 	dataAO1.Env = m.Env
 

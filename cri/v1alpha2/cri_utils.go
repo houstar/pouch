@@ -1043,6 +1043,7 @@ func parseResourcesFromCRI(runtimeResources *runtime.LinuxContainerResources) ap
 		BlkioDeviceWriteBps:  parseThrottleDeviceFromCRI(runtimeResources.GetBlkioDeviceWriteBps()),
 		BlkioDeviceReadIOps:  parseThrottleDeviceFromCRI(runtimeResources.GetBlkioDeviceRead_IOps()),
 		BlkioDeviceWriteIOps: parseThrottleDeviceFromCRI(runtimeResources.GetBlkioDeviceWrite_IOps()),
+		DiskQuota:			  runtimeResources.GetDiskQuota(),
 		KernelMemory:         runtimeResources.GetKernelMemory(),
 		MemoryReservation:    runtimeResources.GetMemoryReservation(),
 		MemorySwappiness:     memorySwappiness,

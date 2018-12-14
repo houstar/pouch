@@ -2471,12 +2471,6 @@ definitions:
             type: "array"
             items:
               type: "string"
-          DiskQuota:
-            type: "object"
-            description: "update disk quota for container"
-            x-nullable: true
-            additionalProperties:
-              type: "string"
 
   ContainerUpgradeConfig:
     description: |
@@ -2630,6 +2624,12 @@ definitions:
         items:
           type: "string"
           example: "c 13:* rwm"
+      DiskQuota:
+        type: "object"
+        description: "update disk quota for container"
+        x-nullable: true
+        additionalProperties:
+          type: "string"
       KernelMemory:
         description: "Kernel memory limit in bytes."
         type: "integer"
